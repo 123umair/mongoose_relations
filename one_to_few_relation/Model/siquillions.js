@@ -41,7 +41,10 @@ const add = async()=>{
 
 }
 add()
-
-
+const getallData = async()=>{
+    const result = await postModel.find({}).populate('users')
+    console.log(result[0])
+}
+getallData()
 // so here this is the siquillions approach where basically we used this approach for large datapoints that are connect wtih multiple different datapoints basically social media posts like facebook instagram quorra
 // One to siquillions appraoch defined as "Stored the reference of the parent document inside the child document" reverse of the one to many approach....
