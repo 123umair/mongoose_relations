@@ -37,7 +37,7 @@ const customerSchema = new Schema({
     name:String,
     order:[
         {type:Schema.Types.ObjectId, //store object id  only (not all the data) in the mongodb but mongoose shows it full data but in themongo db its store only the id 
-         ref:"OrderModel" // inside ref use the model name where you u stored the actual ids of the orders.
+         ref:"Order" // Here you will use the Model name (inside the db it should be collection named orders.) not he js variable name OrderModel
         }
     ]
 })
@@ -57,3 +57,12 @@ const addCustomer=async()=>{
 }
 
 addCustomer()
+
+const Findcustomer = async()=>{
+    const customers = await CustomerModel.find({}).populate("order")
+    console.log(customers) // here it give array of order like the output: order:[[object],[object]]
+    console.log(customers[0])
+}
+Findcustomer()
+
+// by using the populate method we should populate all the data with its orders detail values not just the objectid
