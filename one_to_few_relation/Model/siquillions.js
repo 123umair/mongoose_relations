@@ -8,7 +8,6 @@ main().then(()=>{
     console.log("Db connected")
 })
 
-
 const userSchema = new Schema({
     name:String,
     email:String
