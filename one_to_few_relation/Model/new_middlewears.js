@@ -10,6 +10,13 @@ then(()=>{
 // Here we can learn the pre and post middlewares of mongoose that we will can
 //  use for different connected modles.
 
+const orderSchema = new Schema({
+    ordername: String,
+    address: String
+})
+
+const orderModel = new Model (Order,orderSchema)
+
 const customerSchema = new Schema({
     name:String,
     order:[
@@ -19,8 +26,11 @@ const customerSchema = new Schema({
     ]
 })
 
-const customerModel = new Model(customer,customerSchema)
+const customerModel = new Model(Customer,customerSchema)
 
 const addcustomer = async() =>{
-    const add = customerModel({})
+    const add = customerModel({
+        name:"umairkhan",
+    })
 }
+
