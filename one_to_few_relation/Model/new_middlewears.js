@@ -16,13 +16,13 @@ const orderSchema = new Schema({
 })
 
 const orderModel = mongoose.model("NewOrder",orderSchema)
-const addOrder = async() => {
-    const orders = new orderModel({
-        ordername:"Pizzaa",
-        address:"khayaban chow"
-    })
-    await orders.save()
-}
+// const addOrder = async() => {
+//     const orders = new orderModel({
+//         ordername:"Pizzaa",
+//         address:"khayaban chow"
+//     })
+//     await orders.save()
+// }
 
 // addOrder()
 const customerSchema = new Schema({
@@ -35,15 +35,23 @@ const customerSchema = new Schema({
 })  
 const customerModel = mongoose.model("NewCustomer",customerSchema)
 
-const addcustomer = async() =>{
-    const add = new customerModel({
-        name:"umairkhan",
-    })
-    let order1 = await orderModel.findOne({ ordername:"Pizzaa",
-        address:"khayaban chow"})
-    add.order.push(order1)
-    await add.save()
-   
+// const addcustomerorder = async() =>{
+//     const add = new customerModel({name:"umairkhan",})
+//     const addcust2 = new customerModel({name:"Sajid khan"})
+//     let order1 = await orderModel.findOne({ ordername:"Pizzaa",address:"khayaban chow"})
+//     let order2 = await orderModel.insertOne({ordername:"Shorma",address:"town"})
+//     addcust2.order.push(order2)
+//     add.order.push(order1,order2)
+//     await add.save()
+//     await addcust2.save()
+//     console.log('data is successfully inseted')
+// }
+// addcustomerorder()
 
-}
-addcustomer()
+
+const delCust = async()=>{
+    const customersajid = await customerModel.findByIdAndDelete("69e33698cfbdba6bd1a2222f")
+    // await customersajid.save()
+    console.log(customersajid,'customersajid')   // so here we conclude that only the customer is deleted name sajid document in the model but not its order its will remain present in the ordermodel but its related the order with sajid so basically its happenning in normal case.
+} 
+delCust()
