@@ -1,4 +1,4 @@
-import { Schema,Model } from "mongoose";
+import mongoose, { Schema, } from "mongoose";
 
 const main = async () =>{
      await mongoose.connect('mongodb://127.0.0.1:27017/mongoose_relatoins');
@@ -15,8 +15,16 @@ const orderSchema = new Schema({
     address: String
 })
 
-const orderModel = new Model (Order,orderSchema)
+const orderModel = mongoose.model("NewOrder",orderSchema)
+const addOrder = async() => {
+    const orders = new orderModel({
+        ordername:"Pizzaa",
+        address:"khayaban chow"
+    })
+    await orders.save()
+}
 
+// addOrder()
 const customerSchema = new Schema({
     name:String,
     order:[
@@ -26,11 +34,17 @@ const customerSchema = new Schema({
     ]
 })
 
-const customerModel = new Model(Customer,customerSchema)
+const customerModel = mongoose.model("NewCustomer",customerSchema)
 
 const addcustomer = async() =>{
-    const add = customerModel({
+    const add = new customerModel({
         name:"umairkhan",
     })
-}
+    let order1 = await orderModel.findOne({ ordername:"Pizzaa",
+        address:"khayaban chow"})
+    add.order.push(order1)
+    await add.save()
+   
 
+}
+addcustomer()
