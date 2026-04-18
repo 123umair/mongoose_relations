@@ -32,8 +32,7 @@ const customerSchema = new Schema({
         ref:"Order"}
 
     ]
-})
-
+})  
 const customerModel = mongoose.model("NewCustomer",customerSchema)
 
 const addcustomer = async() =>{
