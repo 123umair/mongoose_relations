@@ -1,5 +1,5 @@
 import mongoose,{Schema} from 'mongoose'
-
+    
 const main = async()=>{
      await mongoose.connect('mongodb://127.0.0.1:27017/mongoose_relatoins');
 }
