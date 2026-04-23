@@ -8,7 +8,12 @@ app.use(cookieparser("umair")) //signature
 
 app.get('/signedcookie',(req,res)=>{
     res.cookie('name','sajid',{signed:true})
+    console.log(req.signedCookies)
     res.send(req.signedCookies) // singesCookies data will shows as a req.singedCookies
+})
+app.get('/verify',(req,res)=>{
+    console.log(req.signedCookies)
+    res.send("/verified")
 })
 
 app.get("/cookie",(req,res,)=>{
