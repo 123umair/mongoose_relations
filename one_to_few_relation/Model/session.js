@@ -4,12 +4,12 @@ import express from 'express'
 const app = express()
 import session from 'express-session'
 
-app.use(session({secret:'Mysecretstring'}))
-//if we create an session then we will required the secret.(singnedCookie)
+    // app.use(session({secret:'Mysecretstring'}))
+    // //if we create an session then we will required the secret.(singnedCookie)
 
-app.get('/test',(req,res)=>{
-    res.send('Session testing')
-})
+    // app.get('/test',(req,res)=>{
+    //     res.send('Session testing')
+    // })
 
 // Express session storing and using info. example 
 
@@ -30,12 +30,18 @@ const sessionOptions={
 }
 app.use(session(sessionOptions))
 app.get('/register',(req,res)=>{
-   let { name } = req.query  // here i will use the query string first i destructure the name and stored it in the session store req.session
+//    let { name } = req.query  // here i will use the query string first i destructure the name and stored it in the session store req.session
+   let {name = 'anonymous'} = req.query // this line means that if name is undefined then the bydefault name is anonymouse should be taken 
    req.session.name = name
+   console.log(req.session)
    res.send(name)
 })
 
+//  ok now these information that i will stored int he session will access on the new different route
 
+app.get('/hello',(req,res)=>{
+    res.send(`Hello,${req.session.name}`)
+})
 
 
 
